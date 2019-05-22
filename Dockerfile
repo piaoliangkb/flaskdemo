@@ -14,4 +14,4 @@ COPY app app
 COPY data-dev.sqlite manage.py start.py config.py boot.sh ./
 
 EXPOSE 8000
-ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:8000", "start:app"]
+ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:8000", "start:app", "--access-logfile", "-", "--error-logfile", "-"]
