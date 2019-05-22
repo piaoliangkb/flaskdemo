@@ -60,5 +60,29 @@ FLASKY_ADMIN_EMAIL = 'admin@admin.com'
 注册时若Email为<code>admin@admin.com</code>，则新账户为管理员权限，可以访问所有界面。
 
 --------------------------------------------------------------
+
+### 2019.5.22 添加docker适配
+
+需要先建立数据库。
+
+```python
+python manage.py shell
+
+from app.models import db, Role
+db.create_all()
+Role.insert_roles()
+```
+
+Dockerfile中将建立好的数据库`data-dev.sqlite`拷贝到docker workdir中。
+
+建立docker image。
+
+`docker image build -t flaskdemo:latest .`
+
+启动container
+
+`docker container run -d --name flask -p 8000:8000 flaskdemo:latest`
+
+
 --------------------------------------------------------------
 flask官方文档：http://flask.pocoo.org/docs/1.0/
